@@ -1,0 +1,452 @@
+Introduction to ML
+
+0:01	Welcome to the Machine Learning Crash Course.
+	0:03	My name is Peter Norvig, and when I joined Google in 2001,
+	0:07	my title was "Director of Machine Learning,"
+	0:10	because I knew then that Machine Learning would be a valuable tool
+	0:13	to help engineers, at Google and everywhere else,
+	0:15	make sense of their data.
+	0:17	I didn't quite anticipate then how widespread the tools would become,
+	0:21	and how much demand there would be for engineers who are skilled at using them.
+	0:25	This course is designed to set you along the path
+	0:28	to becoming a skilled practitioner of the art.
+	0:31	What you learn here will allow you, as a software engineer,
+	0:35	to do three things better.
+	0:37	First, it gives you a tool to reduce the time you spend programming.
+	0:41	Suppose I wanted to write a program to correct spelling errors.
+	0:45	I could make my way through lots of examples and rules of thumb,
+	0:48	like I before E except after C,
+	0:51	and after weeks of hard work come up with a reasonable program.
+	0:54	Or, I could use an off-the-shelf machine learning tool, feed it some examples,
+	0:59	and get a more reliable program in a small fraction of the time.
+	1:03	Second, it will allow you to customize your products,
+	1:06	making them better for specific groups of people.
+	1:09	Suppose I produced my English spelling corrector by writing code by hand,
+	1:14	and it was so successful that I wanted to have versions
+	1:17	in the 100 most popular languages.
+	1:19	I would have to start almost from scratch for each language,
+	1:22	and it would take years of effort.
+	1:24	But if I built it using machine learning, then moving to another language,
+	1:28	to a first approximation, means just collecting data
+	1:31	in that language and feeding it into the exact same machine learning model.
+	1:36	And third, machine learning lets you solve problems that you, as a programmer,
+	1:41	have no idea how to do by hand.
+	1:44	As a human being, I have the ability to recognize my friends'
+	1:47	faces and understand their speech, but I do all of this subconsciously
+	1:51	so if you asked me to write down a program to do it,
+	1:54	I'd be completely baffled.
+	1:56	But these are tasks that machine learning algorithms do very well;
+	1:59	I don't need to tell the algorithm what to do, I only need to show
+	2:02	the algorithm lots of examples, and from that the task can be solved.
+	2:07	Now, besides these three practical reasons for mastering machine learning,
+	2:12	there's a philosophical reason:
+	2:15	Machine learning changes the way you think about a problem.
+	2:18	Software engineers are trained to think logically and mathematically;
+	2:22	we use assertions to prove properties of our program are correct.
+	2:27	With machine learning, the focus shifts from a mathematical science
+	2:31	to a natural science: we're making observations about an uncertain world,
+	2:35	running experiments, and using statistics, not logic,
+	2:39	to analyze the results of the experiment.
+	2:42	The ability to think like a scientist will expand your horizons
+	2:46	and open up new areas that you couldn't explore without it.
+	2:50	So enjoy the journey, and happy exploring.
+
+
+Framing
+
+	0:00	Hi, my name is D. Sculley.
+	0:02	I'm one of the people who is coming to you from Google in order to present this
+	0:05	Machine Learning Crash Course with TensorFlow APIs.
+	0:09	Now before we dive in, let's take a second to remind ourselves
+	0:12	of the basic framework that we are talking about in this class.
+	0:15	And that basic framework is supervised machine learning.
+	0:18	In supervised machine learning, we are learning to create models that combine
+	0:22	inputs, to produce useful predictions even on previously unseen data.
+	0:28	Now, when we're training that model, we're providing it with labels.
+	0:33	And in the case of, say, email spam filtering,
+	0:36	that label might be something like 'spam or not spam'.
+	0:40	It's the target that we're trying to predict.
+	0:43	The features are the way that we represent our data.
+	0:46	So features might be drawn from an email as, say, words in the email
+	0:51	or "to and from addresses", various pieces of routing or header information,
+	0:56	any piece of information that we might extract from that email to represent it
+	0:60	for our machine learning system.
+	1:03	An example, is one piece of data.
+	1:05	For example, one email.
+	1:08	Now that could be a labeled example, in which we have both feature information,
+	1:13	represented in that email, and the label value, of 'spam or not spam'.
+	1:18	Maybe that's come from a user who has provided that to us.
+	1:21	Or we could have an unlabeled example, such as a piece of email
+	1:25	for which we have feature information, but we don't yet know
+	1:28	whether it is spam or not spam.
+	1:29	And likely what we are going to do is classify that
+	1:32	to put it in the user's inbox or spam folder.
+	1:35	Finally, we have a model and that model is the thing that is doing the predicting.
+6	1:39	It's something that we're going to try and create
+	1:42	through a process of learning from data.
+
+Key ML Terminology
+
+What is (supervised) machine learning? Concisely put, it is the following:
+
+    ML systems learn how to combine input to produce useful predictions on never-before-seen data.
+
+Let's explore fundamental machine learning terminology.
+Labels
+
+A label is the thing we're predicting—the y variable in simple linear regression. The label could be the future price of wheat, the kind of animal shown in a picture, the meaning of an audio clip, or just about anything.
+Features
+
+A feature is an input variable—the x variable in simple linear regression. A simple machine learning project might use a single feature, while a more sophisticated machine learning project could use millions of features, specified as:
+
+In the spam detector example, the features could include the following:
+
+    words in the email text
+    sender's address
+    time of day the email was sent
+    email contains the phrase "one weird trick."
+
+Examples
+
+An example is a particular instance of data, x. (We put x in boldface to indicate that it is a vector.) We break examples into two categories:
+
+    labeled examples
+    unlabeled examples
+
+A labeled example includes both feature(s) and the label. That is:
+
+  labeled examples: {features, label}: (x, y)
+
+Use labeled examples to train the model. In our spam detector example, the labeled examples would be individual emails that users have explicitly marked as "spam" or "not spam."
+
+For example, the following table shows 5 labeled examples from a data set containing information about housing prices in California:
+housingMedianAge
+(feature) 	totalRooms
+(feature) 	totalBedrooms
+(feature) 	medianHouseValue
+(label)
+15 	5612 	1283 	66900
+19 	7650 	1901 	80100
+17 	720 	174 	85700
+14 	1501 	337 	73400
+20 	1454 	326 	65500
+
+An unlabeled example contains features but not the label. That is:
+
+  unlabeled examples: {features, ?}: (x, ?)
+
+Here are 3 unlabeled examples from the same housing dataset, which exclude medianHouseValue:
+housingMedianAge
+(feature) 	totalRooms
+(feature) 	totalBedrooms
+(feature)
+42 	1686 	361
+34 	1226 	180
+33 	1077 	271
+
+Once we've trained our model with labeled examples, we use that model to predict the label on unlabeled examples. In the spam detector, unlabeled examples are new emails that humans haven't yet labeled.
+Models
+
+A model defines the relationship between features and label. For example, a spam detection model might associate certain features strongly with "spam". Let's highlight two phases of a model's life:
+
+    Training means creating or learning the model. That is, you show the model labeled examples and enable the model to gradually learn the relationships between features and label.
+
+    Inference means applying the trained model to unlabeled examples. That is, you use the trained model to make useful predictions (y'). For example, during inference, you can predict medianHouseValue for new unlabeled examples.
+
+Regression vs. classification
+
+A regression model predicts continuous values. For example, regression models make predictions that answer questions like the following:
+
+    What is the value of a house in California?
+
+    What is the probability that a user will click on this ad?
+
+A classification model predicts discrete values. For example, classification models make predictions that answer questions like the following:
+
+    Is a given email message spam or not spam?
+
+    Is this an image of a dog, a cat, or a hamster?
+
+QA
+
+Suppose you want to develop a supervised machine learning model to predict whether a given email is "spam" or "not spam." Which of the following statements are true? 
+The labels applied to some examples might be unreliable.
+Definitely. It's important to check how reliable your data is. The labels for this dataset probably come from email users who mark particular email messages as spam. Since most users do not mark every suspicious email message as spam, we may have trouble knowing whether an email is spam. Furthermore, spammers could intentionally poison our model by providing faulty labels.
+Emails not marked as "spam" or "not spam" are unlabeled examples.
+Because our label consists of the values "spam" and "not spam", any email not yet marked as spam or not spam is an unlabeled example.
+
+Suppose an online shoe store wants to create a supervised ML model that will provide personalized shoe recommendations to users. That is, the model will recommend certain pairs of shoes to Marty and different pairs of shoes to Janet. The system will use past user behavior data to generate training data. Which of the following statements are true? 
+"The user clicked on the shoe's description" is a useful label.
+Users probably only want to read more about those shoes that they like. Clicks by users is, therefore, an observable, quantifiable metric that could serve as a good training label. Since our training data derives from past user behavior, our labels need to derive from objective behaviors like clicks that strongly correlate with user preferences.
+"Shoe size" is a useful feature.
+"Shoe size" is a quantifiable signal that likely has a strong impact on whether the user will like the recommended shoes. For example, if Marty wears size 9, the model shouldn't recommend size 7 shoes.
+
+Descending into ML
+
+Linear regression is a method for finding the straight line or hyperplane that best fits a set of points. This module explores linear regression intuitively before laying the groundwork for a machine learning approach to linear regression.
+
+0:01	So as we said before, our model is something that we learned from data.
+	0:05	And there are lots of complicated model types
+	0:06	and lots of interesting ways we can learn from data.
+	0:09	But we're gonna start with something very simple and familiar.
+	0:11	This will open the gateway to more sophisticated methods.
+	0:15	Let's train a first little model from data.
+	0:18	So here we've got a small data set.
+	0:20	On the X axis, we've got our input feature,
+	0:23	which is showing housing square footage.
+	0:26	On our Y axis, we've got the target value
+	0:29	that we're trying to predict of housing price.
+	0:31	So we're gonna try and create a model that takes in
+	0:34	housing square footage as an input feature
+	0:36	and predicts housing price as an output feature.
+	0:39	Here we've got lots of little labeled examples in our data set.
+	0:42	And I'm go ahead and channel our inner ninth grader to fit a line.
+	0:48	It can maybe take a look at our data set and
+	0:51	fit a line that looks about right here. Maybe something like this.
+	0:57	And this line is now a model that predicts housing price given an input.
+	1:05	We can recall from algebra one that we can define this thing
+	1:10	as Y = WX + B.
+	1:16	Now in high school algebra we would have said MX,
+	1:19	here we say W because it's machine learning.
+	1:21	And this is referring to our weight vectors.
+	1:24	Now you'll notice that we've got a little subscript here
+	1:27	because we might be in more than one dimension.
+	1:30	This B is a bias.
+	1:33	and the W gives us our slope.
+3	1:36	How do we know if we have a good line?
+	1:38	Well, we might wanna think of some notion of loss here.
+	1:42	Loss is showing basically how well our line
+	1:46	is doing at predicting any given example.
+	1:50	So we can define this loss
+	1:51	by looking at the difference between the prediction for a given X value
+	1:54	and the true value for that example.
+	1:56	So this guy has some moderate size loss.
+	1:59	This guy has near-zero loss.
+	2:01	Here we've got exactly zero loss.
+	2:03	Here we probably have some positive loss.
+	2:06	Loss is always on a zero through positive scale.
+	2:11	How might we define loss?
+	2:13	Well, that's something that we'll need to think about in a slightly more formal way.
+	2:17	So let's think about one convenient way to define loss for regression problems.
+	2:22	Not the only loss function, but one useful one to start out with.
+	2:25	We call this L2 loss, which is also known as squared error.
+	2:29	And it's a loss that's defined for an individual example
+	2:32	by taking the square of the difference between our model's prediction and the true value.
+	2:37	Now obviously as we get further and further away from the true value,
+	2:42	the loss that we suffer increases with a square.
+	2:45	Now, when we're training a model we don't care about minimizing loss on just one example,
+	2:49	we care about minimizing loss across our entire data set.
+
+Descending into ML: Linear Regression
+
+It has long been known that crickets (an insect species) chirp more frequently on hotter days than on cooler days. For decades, professional and amateur scientists have cataloged data on chirps-per-minute and temperature. As a birthday gift, your Aunt Ruth gives you her cricket database and asks you to learn a model to predict this relationship. Using this data, you want to explore this relationship.
+
+First, examine your data by plotting it:
+Raw data of chirps/minute (x-axis) vs. temperature (y-axis).
+
+Figure 1. Chirps per Minute vs. Temperature in Celsius.
+
+As expected, the plot shows the temperature rising with the number of chirps. Is this relationship between chirps and temperature linear? Yes, you could draw a single straight line like the following to approximate this relationship:
+Best line establishing relationship of chirps/minute (x-axis) vs. temperature (y-axis).
+
+Figure 2. A linear relationship.
+
+True, the line doesn't pass through every dot, but the line does clearly show the relationship between chirps and temperature. Using the equation for a line, you could write down this relationship as follows:
+y=mx + b
+where: 
+
+y is the temperature in Celsius—the value we're trying to predict.
+m is the slope of the line.
+x is the number of chirps per minute—the value of our input feature.
+b is the y-intercept.
+
+By convention in machine learning, you'll write the equation for a model slightly differently:
+y' = w1x1 + b
+where:
+
+y' is the predicted label (a desired output).
+b is the bias (the y-intercept), sometimes referred to as w0
+w1 is the weight of feature 1. Weight is the same concept as the "slope"
+in the traditional equation of a line.
+x1 is a feature (a known input).
+
+To infer (predict) the temperature
+for a new chirps-per-minute value , just substitute the
+x1 value into this model.
+
+Although this model uses only one feature, a more sophisticated model might rely on multiple features, each having a separate weight (w1
+,w2, etc.). For example, a model that relies on three features might look as follows:
+
+y' = b + w1x1 + w2x2 + w3x3
+
+# Refer to Google ML course Bookmark in Firefox
+
+ Squared loss: a popular loss function
+
+The linear regression models we'll examine here use a loss function called squared loss (also known as L2 loss). The squared loss for a single example is as follows:
+
+  = the square of the difference between the label and the prediction
+  = (observation - prediction(x))2
+  = (y - y')2
+
+Mean square error (MSE) is the average squared loss per example over the whole dataset. To calculate MSE, sum up all the squared losses for individual examples and then divide by the number of examples:
+
+Which of the two data sets shown in the preceding plots has the higher Mean Squared Error (MSE)?
+The dataset on the right.
+The eight examples on the line incur a total loss of 0. However, although only two points lay off the line, both of those points are twice as far off the line as the outlier points in the left figure. Squared loss amplifies those differences, so an offset of two incurs a loss four times as great as an offset of one. 
+
+	0:00	Hi, my name is Cassandra Xia and I'm a programmer at Google
+	0:04	that helps other groups within Google use tensor flow.
+	0:08	In this section we're gonna talk about reducing loss.
+	0:11	Previously we learned how to compute the loss, but how do we choose the set of
+	0:16	model parameters that minimizes it?
+	0:19	Well what would be nice is if we had a direction to go in within parameter space.
+	0:26	Some sort of guide such that each set of new hyper-parameters that we took on
+	0:32	had a lower loss than the one before it.
+	0:35	One way to get a direction is to compute the gradient.
+	0:38	The derivative of the loss function with respect to the model parameters.
+	0:42	For simple loss functions like the square loss the derivative is easy to compute.
+	0:47	And it gives us an efficient way to update model parameters.
+	0:51	Think of it as an iterated approach.
+	0:54	Data comes in, we compute the gradient of the loss function on that data.
+	0:58	The negative gradient tells us in which direction to update model parameters
+	1:02	in order to reduce loss. We take a step in that direction,
+	1:05	get a new version of the model, and now we can recompute the gradient and repeat.
+	1:10	Pretend in one dimension, this is our loss function.
+	1:13	It maps our single model parameter theta to the loss.
+	1:17	If we start off at a random value or initialization for theta
+	1:21	then we achieve a corresponding loss.
+	1:25	We can then compute the negative gradient which tells us
+	1:28	in which direction we should go in order to minimize the loss.
+	1:31	If we take a gradient step in that direction we get a new loss.
+	1:36	We can keep taking gradient steps in that direction until we've reached a point
+	1:40	in which we have passed the local minimum, in which the
+	1:43	negative gradient will tell us to go back in the direction that we came from.
+	1:47	How large of a step should we take in the direction of negative gradient?
+	1:51	Well, that is dictated by the learning rate.
+	1:54	A hyper-parameter that you can twiddle.
+	1:56	If learning rate is really small then we'll take a bunch of teeny tiny gradient steps,
+	2:01	Requiring a lot of computation in order to reach the minimum.
+	2:05	However, if the learning rate is very large then we'll take a large step
+	2:10	in the direction of negative gradient. Potentially overshooting the local minimum
+	2:15	and even reaching a point in which the loss is even bigger than before.
+	2:20	In more dimensions, this would cause your model to diverge.
+	2:23	In which case, you should try
+	2:25	decreasing the learning rate by an order of magnitude or so.
+	2:28	(interactive slide)
+	2:29	We just described an algorithm called gradient descent.
+	2:32	We start somewhere and we continuously take steps that hopefully get us
+	2:35	closer and closer to some minimum. However, does it matter where we start?
+	2:40	Well let's think for a minute.
+	2:42	If we put ourselves back in calculus class, we learned that
+	2:46	some problems are convex, meaning that they're shaped like a giant bowl.
+	2:50	So as long as we start somewhere on the bowl and we take reasonable step sizes
+	2:55	and follow the gradients, eventually we'll find our way to the bottom of the bowl.
+	3:00	However, many machine learning problems are not convex.
+	3:04	Neural networks are notoriously not convex,
+	3:07	meaning that rather than being shaped like a bowl,
+	3:10	they are shaped more like an egg crate.
+	3:13	Where there are many possible minimum values,
+	3:16	some of which are better than others.
+	3:18	So there initialization does matter.
+	3:21	More on that later.
+	3:23	Let's think for a moment about efficiency.
+	3:26	When we're computing the gradient of the loss function,
+	3:28	math suggests that we should compute the gradient
+	3:30	over all examples in our data set.
+	3:33	This is the only way to guarantee that our gradient steps
+	3:36	are in exactly the right direction.
+	3:38	For large data sets with a million or billion examples,
+	3:41	that would a lot of computation
+	3:43	in order to perform each step.
+	3:45	Empirically, people have found that rather than using the entire
+	3:49	data set, if they compute the gradient of the loss function over a single example
+	3:54	that mostly works too. Even though they'd have to take more overall steps,
+	3:59	the amount of total computation in order to reach a good solution
+	4:02	is often much smaller.
+	4:04	This is called stochastic gradient descent.
+	4:07	In practice, we adopt an intermediate solution.
+	4:10	Rather than use one example or the entire data set,
+	4:13	we use a small batch, somewhere between ten and a thousand examples
+	4:17	to perform our steps. This is called mini-batch gradient descent.
+
+Note that a gradient is a vector, so it has both of the following characteristics:
+
+    a direction
+    a magnitude
+
+As noted, the gradient vector has both a direction and a magnitude. Gradient descent algorithms multiply the gradient by a scalar known as the learning rate (also sometimes called step size) to determine the next point. For example, if the gradient magnitude is 2.5 and the learning rate is 0.01, then the gradient descent algorithm will pick the next point 0.025 away from the previous point.
+
+The ideal learning rate in one-dimension is 1/f(x)^n
+
+(the inverse of the second derivative of f(x) at x).
+
+The ideal learning rate for 2 or more dimensions is the inverse of the Hessian (matrix of second partial derivatives).
+
+The story for general convex functions is more complex.
+
+Reducing Loss: Stochastic Gradient Descent
+
+In gradient descent, a batch is the total number of examples you use to calculate the gradient in a single iteration.
+
+A large data set with randomly sampled examples probably contains redundant data. In fact, redundancy becomes more likely as the batch size grows. Some redundancy can be useful to smooth out noisy gradients, but enormous batches tend not to carry much more predictive value than large batches.
+
+What if we could get the right gradient on average for much less computation? By choosing examples at random from our data set, we could estimate (albeit, noisily) a big average from a much smaller one. Stochastic gradient descent (SGD) takes this idea to the extreme--it uses only a single example (a batch size of 1) per iteration. Given enough iterations, SGD works but is very noisy. The term "stochastic" indicates that the one example comprising each batch is chosen at random.
+
+Mini-batch stochastic gradient descent (mini-batch SGD) is a compromise between full-batch iteration and SGD. A mini-batch is typically between 10 and 1,000 examples, chosen at random. Mini-batch SGD reduces the amount of noise in SGD but is still more efficient than full-batch.
+
+When performing gradient descent on a large data set, which of the following batch sizes will likely be more efficient?
+A small batch or even a batch of one example (SGD).
+Amazingly enough, performing gradient descent on a small batch or even a batch of one example is usually more efficient than the full batch. After all, finding the gradient of one example is far cheaper than finding the gradient of millions of examples. To ensure a good representative sample, the algorithm scoops up another random small batch (or batch of one) on every iteration. 
+
+
+0:00	As you likely know, TensorFlow is a platform that can be used to build
+	0:04	machine learning models, but it's actually much more generic than that.
+	0:08	It's a general, graph-based computational framework,
+	0:10	that can be used to encode anything you can imagine.
+	0:14	In fact, for the full list of low-level TensorFlow operations that are
+	0:17	possible to use in your code, check out the API page under TensorFlow.org.
+	0:24	Contributors have also added a number of high-level
+	0:27	frameworks that make it easy to do common tasks.
+	0:30	You'll be interacting the most with the TensorFlow estimators API,
+3	0:34	that make it really easy to build neural-network models.
+
+import tensorflow as tf
+
+# Set up a linear classifier.
+classifier = tf.estimator.LinearClassifier(feature_columns)
+
+# Train the model on some example data.
+classifier.train(input_fn=train_input_fn, steps=2000)
+
+# Use it to predict.
+predictions = classifier.predict(input_fn=predict_input_fn)
+
+Common hyperparameters in Machine Learning Crash Course exercises
+
+Many of the coding exercises contain the following hyperparameters:
+
+    steps, which is the total number of training iterations. One step calculates the loss from one batch and uses that value to modify the model's weights once.
+    batch size, which is the number of training examples (chosen at random) for a single step. For example, the batch size for SGD is 1.
+
+The following formula applies:
+total_no_of_training_examples = batch_size * steps
+
+https://colab.research.google.com/notebooks/mlcc/intro_to_pandas.ipynb?utm_source=mlcc&utm_campaign=colab-external&utm_medium=referral&utm_content=pandas-colab&hl=en
+https://colab.research.google.com/notebooks/mlcc/first_steps_with_tensor_flow.ipynb?utm_source=mlcc&utm_campaign=colab-external&utm_medium=referral&utm_content=firststeps-colab&hl=en#scrollTo=RKZ9zNcHJtwc
+
+Is There a Standard Heuristic for Model Tuning?
+
+This is a commonly asked question. The short answer is that the effects of different hyperparameters are data dependent. So there are no hard-and-fast rules; you'll need to test on your data.
+
+That said, here are a few rules of thumb that may help guide you:
+
+    Training error should steadily decrease, steeply at first, and should eventually plateau as training converges.
+    If the training has not converged, try running it for longer.
+    If the training error decreases too slowly, increasing the learning rate may help it decrease faster.
+        But sometimes the exact opposite may happen if the learning rate is too high.
+    If the training error varies wildly, try decreasing the learning rate.
+        Lower learning rate plus larger number of steps or larger batch size is often a good combination.
+    Very small batch sizes can also cause instability. First try larger values like 100 or 1000, and decrease until you see degradation.
+
+Again, never go strictly by these rules of thumb, because the effects are data dependent. Always experiment and verify.
