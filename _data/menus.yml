@@ -22,3 +22,8 @@
 # - title: github
 #   url: https://github.com/piharpi/jekyll-klise
 #   external: true
+
+
+- title: fastpages
+  url: https://akashravichandran.github.io/ak-quest/
+  external: true
