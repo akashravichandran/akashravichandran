@@ -1,11 +1,13 @@
 ---
-title: Acknowledgment
+title: acknowledgment
 permalink: /thanks/
 layout: page
-excerpt: Thanks to amazing people that i met, who help me out from follishness, connecting me with another good person, giving some advice when i'm at a bad things, pulling me from ordinary to be great.
+excerpt: 
 comments: false
 ---
 
-Thanks to Jekyll Klise
+<style>
+p {text-align: center;}
+</style>
 
-<hr>
+thanks to the Klise - Jekyll theme from [piharpi](https://github.com/piharpi/jekyll-klise)

@@ -1,5 +1,5 @@
 ---
-title: Search Page
+title: search page
 permalink: /search/
 layout: page
 excerpt: You can search the website from here!
@@ -9,10 +9,14 @@ comments: false
 <!-- Html Elements for Search -->
 
 <div id="search-container" style="text-align:center;">
-<input type="text" id="search-input" placeholder="search...">
+<input type="text" id="search-input" placeholder="search this website...">
 <ul id="results-container"></ul>
 </div>
-
+<style> 
+  input[type=text] {
+    padding: 12px 20px;
+  }
+</style>
 <!-- Script pointing to search-script.js -->
 <script src="/assets/js/simple-jekyll-search.min.js" type="text/javascript"></script>
 

@@ -1,8 +1,8 @@
 ---
-title: Akash Ravichandran
+title: akash ravichandran
 permalink: /about/
 layout: page
-excerpt: Life Long Learner!
+excerpt: 
 comments: False
 ---
 
