@@ -17,6 +17,7 @@ cd ~/.ssh/ && ssh-keygen -t rsa -b 4096 -C "replace_with_your_mail_id"
 ```
 
 **Step2 - Copying the public ssh key to github**
+
 - [adding-a-new-ssh-key-to-your-github-account](https://help.github.com/en/enterprise/2.15/user/articles/adding-a-new-ssh-key-to-your-github-account)
 
 **Step3 - Cloning your project as a ssh command**
@@ -29,8 +30,10 @@ git clone git@github.com:(...Link_to_your_repository...)
 
 **Step4 - Configuring email and username for your cloned repository**
 
+```
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
+```
 
 # Conclusion
 Using the ssh setup is both secure and is a one time setup process. Hope it helps !
