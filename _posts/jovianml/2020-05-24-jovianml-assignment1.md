@@ -1,6 +1,14 @@
+---
+title: JovianML - ZerotoGAN - Assignment 1
+date: 2020-05-24
+tags: [python, conda, jupyter, google colab, pytorch]
+description: My solutions for assignment one of jovianml
+categories: jovianml
+---
+
+
 <a href="https://colab.research.google.com/github/akashravichandran/jovian-zerotogan/blob/master/01_tensor_operations.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
-# JovianML - ZerotoGAN - Assignment 1
 
 ### Some useful methods from Pytorch tensor class
 
@@ -31,7 +39,7 @@ When other is a tensor, the shape of other must be broadcastable with the shape 
 
 
 ```python
-# Example 1 - working 
+# Example 1 - working
 a = torch.ones(1)
 b = torch.ones(1)
 torch.add(a, b)
@@ -44,7 +52,7 @@ torch.add(a, b)
 
 
 
-Explanation about example
+The first example adds a one dimensional tensor and returns the answer as a one dimensional tensor
 
 
 ```python
@@ -61,8 +69,7 @@ torch.add(a, b)
 
 
 
-Explanation about example
-
+The second example adds a one dimensional four elements to another one dimensional four elements tensor and returns the answer as a four element tensor.
 
 ```python
 # Example 3 - breaking (to illustrate when it breaks)
@@ -86,11 +93,7 @@ torch.add(a, b)
     RuntimeError: The size of tensor a (4) must match the size of tensor b (2) at non-singleton dimension 0
 
 
-Explanation about example
-
-- The first example adds a one dimensional tensor and returns the answer as a one dimensional tensor
-- The second example adds a one dimensional four elements to another one dimensional four elements tensor and returns the answer as a four element tensor.
-- The third example when the dimension of the operating tensor vary, they throw a runtime error
+The third example when the dimension of the operating tensor vary, they throw a runtime error
 
 ## Function 2 - torch.cat
 
@@ -111,7 +114,7 @@ torch.cat((x, x), 0)
 
 
 
-Explanation about example
+The first example concatenates the elements of the tensor by appending to the vertical dimension
 
 
 ```python
@@ -127,7 +130,7 @@ torch.cat((x, x), 1)
 
 
 
-Explanation about example
+The second example concatenates the elements of the tensor by appending to the horizontal dimension
 
 
 ```python
@@ -151,11 +154,8 @@ torch.cat((x, y), 1)
     RuntimeError: Sizes of tensors must match except in dimension 1. Got 1 and 2 in dimension 0
 
 
-Explanation about example
+The third example breaks when applied to tensors of varying sizes.
 
-- The first example concatenates the elements of the tensor by appending to the vertical dimension
-- The second example concatenates the elements of the tensor by appending to the horizontal dimension
-- The third example breaks when applied to tensors of varying sizes.
 
 
 
@@ -184,7 +184,7 @@ a.apply_(square)
 
 
 
-Explanation about example
+The first example applies the square function to the elements of the tensor
 
 
 ```python
@@ -202,7 +202,7 @@ a.apply_(cube)
 
 
 
-Explanation about example
+The second example applies the cube function to the tensor at hand
 
 
 ```python
@@ -228,11 +228,8 @@ a.apply_(square)
     TypeError: apply_ is only implemented on CPU tensors
 
 
-Explanation about example
+The third example breaks when applied to the tensor of devicetype gpu, because of its incompatibility.
 
-- The first example applies the square function to the elements of the tensor
-- The second example applies the cube function to the tensor at hand
-- The third example breaks when applied to the tensor of devicetype gpu, because of its incompatibility.
 
 ## Function 4 - torch.abs
 
@@ -252,7 +249,7 @@ torch.abs(torch.tensor(-3))
 
 
 
-Explanation about example
+The first example applies the abs function to a scalar tensor
 
 
 ```python
@@ -267,7 +264,7 @@ torch.abs(torch.tensor([-1, -2, 3]))
 
 
 
-Explanation about example
+The second example applies the abs function to a one dimensional tensor
 
 
 ```python
@@ -288,11 +285,8 @@ torch.abs(torch.tensor([True, True, False]))
     RuntimeError: "abs_cpu" not implemented for 'Bool'
 
 
-Explanation about example
+The third example breaks when abs is applied to boolean.
 
-- The first example applies the abs function to a scalar tensor
-- The second example applies the abs function to a one dimensional tensor
-- The third example breaks when abs is applied to boolean.
 
 ## Function 5 - torch.arange
 
@@ -312,7 +306,7 @@ torch.arange(1, 2.5)
 
 
 
-Explanation about example
+The first example gets a range of values without step specified
 
 
 ```python
@@ -327,7 +321,7 @@ torch.arange(1, 2.5, 0.5)
 
 
 
-Explanation about example
+The second example gets a range of values with step specified
 
 
 ```python
@@ -349,16 +343,13 @@ torch.arange(1, 2.5, 0)
     RuntimeError: step must be nonzero
 
 
-Explanation about example
+The third example breaks when step value is set to zero
 
-- The first example gets a range of values without step specified
-- The second example gets a range of values with step specified
-- The third example breaks when step value is set to zero
 
 ## Conclusion
 
 Here I have randomly picked some methods from pytorch, pytorch is really vast and it is still growing. Hope you like the methods that I have taken here to be explained. Thank you!
 
 ## Reference Links
-* Official documentation for `torch.Tensor`: https://pytorch.org/docs/stable/tensors.html
+* Documentation for `torch.Tensor`: [https://pytorch.org/docs/stable/tensors.html](https://pytorch.org/docs/stable/tensors.html)
 
