@@ -20,12 +20,14 @@ cd ~/.ssh/ && ssh-keygen -t rsa -b 4096 -C "replace_with_your_mail_id"
 - [adding-a-new-ssh-key-to-your-github-account](https://help.github.com/en/enterprise/2.15/user/articles/adding-a-new-ssh-key-to-your-github-account)
 
 **Step3 - Cloning your project as a ssh command**
+In github you will the find the option to clone your repo as a ssh command. Use that format to clone your repository.
 
 ```
-git clone git@github.com:(Link_to_your_repository)
+git clone git@github.com:(...Link_to_your_repository...)
 ```
 
 **Step4 - Configuring email and username for your cloned repository**
+
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
 
