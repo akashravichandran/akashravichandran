@@ -2,7 +2,7 @@
 title: JovianML - ZerotoGAN - Assignment 1
 date: 2020-05-24
 tags: [python, conda, jupyter, google colab, pytorch]
-description: My solutions for assignment one of jovianml
+description: My solutions for assignment one of jovianml zerotogan
 categories: jovianml
 ---
 
