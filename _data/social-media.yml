@@ -1,0 +1,23 @@
+email:
+  id: 'akash.chandran30@gmail.com'
+  href: 'mailto:'
+  title: 'Email'
+  fa-icon: 'fa-envelope-square'
+
+twitter:
+  id: 'ak_ravichandran'
+  href: 'https://twitter.com/'
+  title: 'Twitter'
+  fa-icon: 'fa-twitter-square'
+
+github:
+  id: 'akashravichandran'
+  href: 'https://github.com/'
+  title: 'GitHub'
+  fa-icon: 'fa-github-square'
+
+linkedin:
+  id: 'akashravichandran'
+  href: 'https://github.com/in/'
+  title: 'LinkedIn'
+  fa-icon: 'fa-linkedin-square'
