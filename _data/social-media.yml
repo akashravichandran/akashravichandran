@@ -2,22 +2,28 @@ email:
   id: 'akash.chandran30@gmail.com'
   href: 'mailto:'
   title: 'Email'
-  fa-icon: 'fa-envelope-square'
+  fa-icon: 'fa-envelope'
 
 twitter:
   id: 'ak_ravichandran'
   href: 'https://twitter.com/'
   title: 'Twitter'
-  fa-icon: 'fa-twitter-square'
+  fa-icon: 'fa-twitter'
 
 github:
   id: 'akashravichandran'
   href: 'https://github.com/'
   title: 'GitHub'
-  fa-icon: 'fa-github-square'
+  fa-icon: 'fa-github'
 
 linkedin:
   id: 'akashravichandran'
   href: 'https://github.com/in/'
   title: 'LinkedIn'
-  fa-icon: 'fa-linkedin-square'
+  fa-icon: 'fa-linkedin'
+
+instagram:
+  id: 'akash_ravichandran'
+  href: 'https://www.instagram.com/'
+  title: 'instagram'
+  fa-icon: 'fa-instagram'
