@@ -2,7 +2,7 @@
 title: akash ravichandran
 permalink: /about/
 layout: page
-excerpt: 
+excerpt:
 comments: False
 ---
 

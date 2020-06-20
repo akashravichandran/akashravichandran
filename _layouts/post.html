@@ -5,6 +5,10 @@ layout: compress
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: "en" }}">
 
+<head>
+  <script src="https://kit.fontawesome.com/be146ff004.js" crossorigin="anonymous"></script>
+</head>
+
 {% include header.html %}
 
 <body>
@@ -45,14 +49,20 @@ layout: compress
         </header>
 
         <div class="page-content" itemprop="articleBody">
-          {% include anchor_headings.html html=content anchorClass="anchor-head" beforeHeading=true h_min=1 h_max=4 %}
+          {% include anchor_headings.html html=content anchorClass="anchor-head" beforeHeading=true h_min=1 h_max=3 %}
           {% if page.tweet %}
-          <p>Comments this article on 
+          <p>Comments this article on
             <a href="https://twitter.com/{{site.username}}/status/{{page.tweet}}">Twitter</a>.
           </p>
           {% endif %}
         </div>
       </article>
+
+      <div class="share-posts">
+        <h1>{% include share-posts.html %}</h1>
+      </div>
+      <br>
+
       {% if page.comments %}
         {% include comments.html%}
       {% endif %}
