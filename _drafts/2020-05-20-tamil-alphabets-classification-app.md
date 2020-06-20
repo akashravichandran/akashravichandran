@@ -1,1 +1,0 @@
-<!-- https://www.researchgate.net/publication/320524438_Kalanjiyam_Unconstrained_Offline_Tamil_Handwritten_Database -->
