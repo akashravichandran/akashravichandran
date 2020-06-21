@@ -233,9 +233,21 @@
   }
 
   .post-item-date {
-    min-width: 96px;
+    min-width: 100px;
     color: $black;
-    font-weight: 700;
+    font-weight: normal;
+    padding-right: 10px;
+
+    @include media-query($on-mobile) {
+      font-size: 16px;
+    }
+  }
+
+  .post-item-time {
+    min-width: 100px;
+    color: $black;
+    font-weight: normal;
+    padding-left: 10px;
     padding-right: 10px;
 
     @include media-query($on-mobile) {
@@ -245,9 +257,13 @@
 
   .post-item-title {
     margin: 0;
+    // min-width: 400px;
     color: $text-base-color;
-    font-weight: normal;
+    font-weight: 800;
     letter-spacing: 0.1px;
+    padding-left: 5px;
+    padding-right: 5px;
+
 
     a {
       &:hover,
