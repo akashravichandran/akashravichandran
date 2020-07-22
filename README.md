@@ -1,6 +1,6 @@
 ### My name is Akash Ravichandran! 
 
-- 🔭 I’m currently working at Junior Data Scientist.
+- 🔭 I’m currently working as a Junior Data Scientist.
 - 🌱 I’m interested in the areas of Robotics and AI.
 - 👯 Always curious to talk about photography and programming.
 - ⚡ Other Links: [Twitter](https://twitter.com/ak_ravichandran), [Instagram](https://www.instagram.com/akash_ravichandran/)   
